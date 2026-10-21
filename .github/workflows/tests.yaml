@@ -52,7 +52,7 @@ jobs:
                   echo "should_skip=$SHOULD_SKIP" >> $GITHUB_OUTPUT
     tests-unit:
         needs: should-run
-        runs-on: blacksmith-4vcpu-ubuntu-2404
+        runs-on: ubuntu-24.04
         steps:
             - name: Checkout
               if: needs.should-run.outputs.should_skip != 'true'
@@ -78,7 +78,7 @@ jobs:
     # Each shard spins up its own containers and stays internally serial.
     tests-integration-shards:
         needs: should-run
-        runs-on: blacksmith-4vcpu-ubuntu-2404
+        runs-on: ubuntu-24.04
         strategy:
             fail-fast: false
             matrix:
@@ -125,7 +125,7 @@ jobs:
         # Accessibility regression suite. connect-ui renders design-system components, so a
         # design-system change can regress contrast/focus too — run on any non-docs change.
         if: needs.should-run.outputs.should_skip != 'true'
-        runs-on: blacksmith-4vcpu-ubuntu-2404
+        runs-on: ubuntu-24.04
         permissions:
             contents: read
         steps:

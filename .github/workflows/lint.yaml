@@ -48,7 +48,7 @@ jobs:
                   echo "should_skip=$SHOULD_SKIP" >> $GITHUB_OUTPUT
     lint-code:
         needs: should-run
-        runs-on: blacksmith-4vcpu-ubuntu-2404
+        runs-on: ubuntu-24.04
         steps:
             - uses: actions/checkout@v4
               if: needs.should-run.outputs.should_skip != 'true'
@@ -71,7 +71,7 @@ jobs:
               run: npm run format:check
     typecheck:
         needs: should-run
-        runs-on: blacksmith-4vcpu-ubuntu-2404
+        runs-on: ubuntu-24.04
         permissions:
             contents: read
         steps:
