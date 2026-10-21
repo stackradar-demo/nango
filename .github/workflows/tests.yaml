@@ -60,6 +60,12 @@ jobs:
               with:
                   fetch-depth: '0'
 
+            # stackradar-demo fork: scripts/publish-managed-image-release.mjs reads the repository from the
+            # origin remote and its unit tests expect NangoHQ/nango, so point origin at upstream as upstream CI has it.
+            - name: Use the upstream origin for repository-aware tests
+              if: needs.should-run.outputs.should_skip != 'true'
+              run: git remote set-url origin https://github.com/NangoHQ/nango.git
+
             - name: Use Node.js
               if: needs.should-run.outputs.should_skip != 'true'
               uses: ./.github/actions/setup-node
