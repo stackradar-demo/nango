@@ -48,7 +48,7 @@ jobs:
     check-tokens:
         needs: should-run
         if: needs.should-run.outputs.should_skip != 'true'
-        runs-on: blacksmith-4vcpu-ubuntu-2404
+        runs-on: ubuntu-24.04
         steps:
             - uses: actions/checkout@v4
               with:
