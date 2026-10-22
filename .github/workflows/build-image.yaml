@@ -89,6 +89,7 @@ jobs:
                   docker push nangohq/nango:${{ env.SHA }}
 
             - name: (self-hosted) Build and push
-              if: needs.should-run.outputs.should_skip != 'true' && github.event_name != 'pull_request'
+              # stackradar-demo fork: this builds from nangohq/nango:<sha>, which the step above only pushes with Docker Hub credentials
+              if: needs.should-run.outputs.should_skip != 'true' && github.event_name != 'pull_request' && env.CAN_PUSH == 'true'
               run: |
                   ./scripts/build_docker_self_hosted.sh ${{ env.SHA }} ${{ env.CAN_PUSH }}
